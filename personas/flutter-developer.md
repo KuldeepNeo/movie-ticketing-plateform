@@ -1,4 +1,4 @@
-# Frontend Flutter Developer Persona
+# Frontend Flutter Developer
 
 ## Role
 
