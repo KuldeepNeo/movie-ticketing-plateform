@@ -76,3 +76,53 @@ api-contract.md
 
 Do not generate implementation code.
 
+---
+
+## Generate backend setup.
+
+## Role
+
+Act as the Solution Architect.
+
+### Required Inputs
+[solution-architect.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/solution-architect.md)  
+[system-design.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/system_design_plan/system-design.md) 
+[database-design.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/system_design_plan/database-design.md) 
+[api-contract.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/system_design_plan/api-contract.md) 
+
+Strictly follow all the intructions.
+
+
+Action:
+Design the Backend Project Structure.
+
+Generate only:
+backend-project-setup.md
+
+Do not generate source code.
+
+---
+
+## Generate Frontend setup.
+
+## Role
+
+Act as the Solution Architect.
+
+### Required Inputs
+[solution-architect.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/solution-architect.md)  
+[system-design.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/system_design_plan/system-design.md) 
+[api-contract.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/system_design_plan/api-contract.md) 
+
+Strictly follow all the intructions.
+
+
+Action:
+Design the Frontend Project Structure.
+
+Generate only:
+frontend-project-setup.md
+
+Do not generate source code.
+
+---
