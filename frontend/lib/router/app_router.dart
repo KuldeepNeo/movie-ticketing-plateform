@@ -9,6 +9,8 @@ import '../features/auth/presentation/screens/admin_shell_layout.dart';
 import '../features/auth/presentation/screens/admin_movies_screen.dart';
 import '../features/auth/presentation/screens/admin_theaters_screen.dart';
 import '../features/auth/presentation/screens/admin_screens_screen.dart';
+import '../features/auth/presentation/screens/admin_shows_screen.dart';
+import '../features/auth/presentation/screens/movie_details_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authControllerProvider);
@@ -32,6 +34,14 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/home',
         builder: (context, state) => const HomeScreen(),
       ),
+      GoRoute(
+        path: '/movies/:id',
+        builder: (context, state) {
+          final idStr = state.pathParameters['id'] ?? '0';
+          final id = int.tryParse(idStr) ?? 0;
+          return MovieDetailsScreen(movieId: id);
+        },
+      ),
       ShellRoute(
         builder: (context, state, child) => AdminShellLayout(child: child),
         routes: [
@@ -50,6 +60,10 @@ final routerProvider = Provider<GoRouter>((ref) {
               final theaterId = int.tryParse(theaterIdStr) ?? 0;
               return AdminScreensScreen(theaterId: theaterId);
             },
+          ),
+          GoRoute(
+            path: '/admin/shows',
+            builder: (context, state) => const AdminShowsScreen(),
           ),
         ],
       ),

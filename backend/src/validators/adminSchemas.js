@@ -116,11 +116,85 @@ const screenUpdateSchema = z.object({
     .optional()
 });
 
+/**
+ * Zod validation schema for POST /api/v1/admin/shows
+ */
+const showBaseSchema = z.object({
+  movie_id: z
+    .number({ required_error: 'Movie ID is required.' })
+    .int('Movie ID must be an integer.')
+    .positive('Movie ID must be greater than 0.'),
+  screen_id: z
+    .number({ required_error: 'Screen ID is required.' })
+    .int('Screen ID must be an integer.')
+    .positive('Screen ID must be greater than 0.'),
+  show_date: z
+    .string({ required_error: 'Show date is required.' })
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Must be in YYYY-MM-DD format.'),
+  start_time: z
+    .string({ required_error: 'Start time is required.' })
+    .datetime({ message: 'Must be a valid ISO 8601 UTC timestamp.' }),
+  end_time: z
+    .string({ required_error: 'End time is required.' })
+    .datetime({ message: 'Must be a valid ISO 8601 UTC timestamp.' }),
+  ticket_price: z
+    .number({ required_error: 'Ticket price is required.' })
+    .int('Ticket price must be an integer.')
+    .nonnegative('Ticket price must be greater than or equal to 0.'),
+  status: z
+    .enum(['scheduled', 'active', 'completed', 'cancelled'])
+    .optional()
+    .default('scheduled')
+});
+
+const showCreateSchema = showBaseSchema
+  .refine(data => new Date(data.end_time) > new Date(data.start_time), {
+    message: 'End time must be after start time.',
+    path: ['end_time']
+  })
+  .refine(data => {
+    const showDate = new Date(data.show_date + 'T00:00:00Z');
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    return showDate >= today;
+  }, {
+    message: 'Show date must be today or a future date.',
+    path: ['show_date']
+  });
+
+/**
+ * Zod validation schema for PUT /api/v1/admin/shows/:id
+ */
+const showUpdateSchema = showBaseSchema.partial()
+  .refine(data => {
+    if (data.start_time && data.end_time) {
+      return new Date(data.end_time) > new Date(data.start_time);
+    }
+    return true;
+  }, {
+    message: 'End time must be after start time.',
+    path: ['end_time']
+  })
+  .refine(data => {
+    if (data.show_date) {
+      const showDate = new Date(data.show_date + 'T00:00:00Z');
+      const today = new Date();
+      today.setUTCHours(0, 0, 0, 0);
+      return showDate >= today;
+    }
+    return true;
+  }, {
+    message: 'Show date must be today or a future date.',
+    path: ['show_date']
+  });
+
 module.exports = {
   movieCreateSchema,
   movieUpdateSchema,
   theaterCreateSchema,
   theaterUpdateSchema,
   screenCreateSchema,
-  screenUpdateSchema
+  screenUpdateSchema,
+  showCreateSchema,
+  showUpdateSchema
 };

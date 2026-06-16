@@ -2,6 +2,7 @@ const express = require('express');
 const adminMovieController = require('../controllers/adminMovieController');
 const adminTheaterController = require('../controllers/adminTheaterController');
 const adminScreenController = require('../controllers/adminScreenController');
+const adminShowController = require('../controllers/adminShowController');
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 const validationMiddleware = require('../middlewares/validationMiddleware');
@@ -12,7 +13,9 @@ const {
   theaterCreateSchema,
   theaterUpdateSchema,
   screenCreateSchema,
-  screenUpdateSchema
+  screenUpdateSchema,
+  showCreateSchema,
+  showUpdateSchema
 } = require('../validators/adminSchemas');
 
 const router = express.Router();
@@ -38,5 +41,11 @@ router.get('/theaters/:theaterId/screens', adminScreenController.getScreens);
 router.post('/theaters/:theaterId/screens', validationMiddleware(screenCreateSchema), adminScreenController.createScreen);
 router.put('/screens/:id', validationMiddleware(screenUpdateSchema), adminScreenController.updateScreen);
 router.delete('/screens/:id', adminScreenController.deleteScreen);
+
+// --- Show Scheduling ---
+router.get('/shows', adminShowController.getShows);
+router.post('/shows', validationMiddleware(showCreateSchema), adminShowController.createShow);
+router.put('/shows/:id', validationMiddleware(showUpdateSchema), adminShowController.updateShow);
+router.delete('/shows/:id', adminShowController.deleteShow);
 
 module.exports = router;

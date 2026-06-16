@@ -25,4 +25,12 @@ class ApiConstants {
   // Admin Screen Management
   static String adminTheaterScreens(int theaterId) => '/admin/theaters/$theaterId/screens';
   static String adminScreen(int id) => '/admin/screens/$id';
+
+  // Admin Show Management
+  static const String adminShows = '/admin/shows';
+  static String adminShow(int id) => '/admin/shows/$id';
+
+  // Customer Movie Discovery
+  static const String movies = '/movies';
+  static String movieDetails(int id) => '/movies/$id';
 }

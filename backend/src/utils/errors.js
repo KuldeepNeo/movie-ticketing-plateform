@@ -42,11 +42,18 @@ class NotFoundError extends AppError {
   }
 }
 
+class UnprocessableEntityError extends AppError {
+  constructor(message = 'The request cannot be processed due to semantic errors.') {
+    super(message, 422, 'UNPROCESSABLE_ENTITY');
+  }
+}
+
 module.exports = {
   AppError,
   ValidationError,
   UnauthorizedError,
   ForbiddenError,
   ConflictError,
-  NotFoundError
+  NotFoundError,
+  UnprocessableEntityError
 };

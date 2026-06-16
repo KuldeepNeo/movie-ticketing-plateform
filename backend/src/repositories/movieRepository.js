@@ -114,6 +114,72 @@ class MovieRepository {
 
     return affectedRows > 0;
   }
+
+  /**
+   * Find published movies available in a city based on scheduled shows.
+   * @param {number} cityId 
+   * @param {object} filters 
+   * @returns {Promise<{data: object[], total: number}>}
+   */
+  async findPublishedMoviesByCity(cityId, filters = {}) {
+    const page = parseInt(filters.page, 10) || 1;
+    const limit = Math.min(parseInt(filters.limit, 10) || 20, 50);
+    const offset = (page - 1) * limit;
+
+    const baseQuery = () => db('movies')
+      .join('shows', 'shows.movie_id', 'movies.id')
+      .join('screens', 'screens.id', 'shows.screen_id')
+      .join('theaters', 'theaters.id', 'screens.theater_id')
+      .where('theaters.city_id', cityId)
+      .where('movies.status', 'published')
+      .whereNull('shows.deleted_at')
+      .whereNull('screens.deleted_at')
+      .whereNull('theaters.deleted_at')
+      .whereNull('movies.deleted_at');
+
+    const filterQuery = (builder) => {
+      if (filters.search) {
+        builder.where('movies.title', 'like', `%${filters.search}%`);
+      }
+      if (filters.language) {
+        builder.where('movies.language', filters.language);
+      }
+      if (filters.genre) {
+        builder.where('movies.genre', filters.genre);
+      }
+      if (filters.age_rating) {
+        builder.where('movies.age_rating', filters.age_rating);
+      }
+    };
+
+    const countResult = await baseQuery()
+      .modify(filterQuery)
+      .countDistinct('movies.id as count')
+      .first();
+
+    const total = countResult ? parseInt(countResult.count, 10) : 0;
+
+    const dataQuery = baseQuery().modify(filterQuery);
+
+    let sortByField = 'movies.title';
+    if (filters.sort_by === 'id' || filters.sort_by === 'release_date') {
+      sortByField = 'movies.id';
+    }
+
+    const sortOrder = filters.sort_order === 'desc' ? 'desc' : 'asc';
+
+    const data = await dataQuery
+      .select('movies.id', 'movies.title', 'movies.language', 'movies.genre', 'movies.age_rating', 'movies.runtime_minutes', 'movies.poster_url', 'movies.status')
+      .distinct('movies.id')
+      .limit(limit)
+      .offset(offset)
+      .orderBy(sortByField, sortOrder);
+
+    return {
+      data,
+      total
+    };
+  }
 }
 
 module.exports = new MovieRepository();

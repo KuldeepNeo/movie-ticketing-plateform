@@ -138,6 +138,13 @@ class AdminShellLayout extends ConsumerWidget {
                   isSelected: currentLocation.startsWith('/admin/theaters'),
                   onTap: () => context.go('/admin/theaters'),
                 ),
+                const SizedBox(height: 8),
+                _SidebarItem(
+                  icon: Icons.schedule_rounded,
+                  label: 'Shows',
+                  isSelected: currentLocation.startsWith('/admin/shows'),
+                  onTap: () => context.go('/admin/shows'),
+                ),
               ],
             ),
           ),
@@ -191,6 +198,16 @@ class AdminShellLayout extends ConsumerWidget {
                     onTap: () {
                       Navigator.pop(context);
                       context.go('/admin/theaters');
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  _SidebarItem(
+                    icon: Icons.schedule_rounded,
+                    label: 'Shows',
+                    isSelected: currentLocation.startsWith('/admin/shows'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      context.go('/admin/shows');
                     },
                   ),
                 ],

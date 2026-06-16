@@ -67,6 +67,29 @@ class MovieService {
 
     await movieRepository.delete(id);
   }
+
+  /**
+   * Get all published movies in a city with filters and pagination.
+   * @param {number} cityId 
+   * @param {object} filters 
+   * @returns {Promise<object>}
+   */
+  async getPublishedMoviesByCity(cityId, filters) {
+    return movieRepository.findPublishedMoviesByCity(cityId, filters);
+  }
+
+  /**
+   * Get movie details by ID for public consumption (only if published).
+   * @param {number} id 
+   * @returns {Promise<object>}
+   */
+  async getMovieById(id) {
+    const movie = await movieRepository.findById(id);
+    if (!movie || movie.status !== 'published') {
+      throw new NotFoundError('Movie with this ID does not exist.');
+    }
+    return movie;
+  }
 }
 
 module.exports = new MovieService();

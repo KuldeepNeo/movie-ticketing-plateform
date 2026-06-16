@@ -377,3 +377,50 @@ Include:
 Do not implement new features, refactor unrelated code, or modify approved workflows. Focus only on resolving QA findings and preparing the module for QA re-validation.
 
 ---
+
+# Sprint 3: Scheduling & Discovery - Backend Implementation
+
+## Role:
+Act as the Backend Developer.
+
+## Task:
+Implement only the backend work for the current sprint as defined in the Sprint Roadmap and Implementation Roadmap.
+
+
+Context:
+Review [backend-developer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/backend-developer.md), [save-token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/save-token.md), [implementation-roadmap.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/implementation-roadmap.md) .
+
+Requirements:
+- Strictly follow Sprint 3: Scheduling & Discovery -> Backend Tasks.
+- Strictly follow Implementation Order
+- Follow the approved System Design, Database Design, API Contract, and Backend Project Setup.
+- Generate only the files required for this sprint.
+- Do not modify architecture, database schema, API contracts, or unrelated modules.
+
+Output:
+Generate production-ready backend code only.
+
+---
+
+# Sprint 3: Scheduling & Discovery - Frontend Implementation
+
+Role:
+Act as the Frontend Flutter Developer
+
+## Task:
+
+Implement only the frontend work for the current sprint as defined in the Sprint 3: Scheduling & Discovery.
+
+Context:
+Review [flutter-developer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/flutter-developer.md) , [save-token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/save-token.md), [implementation-roadmap.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/implementation-roadmap.md) 
+
+Requirements:
+Strictly follow Sprint 3: Scheduling & Discovery -> Frontend Tasks.
+- Follow the approved System Design, API Contract, and Frontend Project Setup.
+- Consume only approved APIs.
+- Generate only the UI, components, state management, and integrations required for this sprint.
+- Do not modify backend code, API contracts, or future sprint functionality.
+
+Output:
+Generate production-ready frontend code only.
+Do not run the app and validate.
