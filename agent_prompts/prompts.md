@@ -259,3 +259,121 @@ The connection errored: The XMLHttpRequest onError callback was called. This Typ
 
 
 Strictly follow guideline which mentioned in [qa-engineer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/journal-hub/agent-prompts/personas/qa-engineer.md) 
+
+---
+
+# Sprint 2: Admin Foundation (Inventory) - Backend Implementation
+
+## Role:
+Act as the Backend Developer.
+
+## Task:
+Implement only the backend work for the current sprint as defined in the Sprint Roadmap and Implementation Roadmap.
+
+
+Context:
+Review [backend-developer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/backend-developer.md), [save-token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/save-token.md), [implementation-roadmap.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/implementation-roadmap.md) .
+
+Requirements:
+- Strictly follow Sprint 2: Admin Foundation (Inventory) -> Backend Tasks.
+- Strictly follow Implementation Order
+- Follow the approved System Design, Database Design, API Contract, and Backend Project Setup.
+- Generate only the files required for this sprint.
+- Do not modify architecture, database schema, API contracts, or unrelated modules.
+
+Output:
+Generate production-ready backend code only.
+
+---
+
+# Sprint 2: Admin Foundation (Inventory) - Frontend Implementation
+
+Role:
+Act as the Frontend Flutter Developer
+
+## Task:
+
+Implement only the frontend work for the current sprint as defined in the Sprint 1: Foundation & Identity.
+
+Context:
+Review [flutter-developer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/flutter-developer.md) , [save-token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/save-token.md), [implementation-roadmap.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/agent_prompts/implementation-roadmap.md) 
+
+Requirements:
+Strictly follow Sprint 2: Admin Foundation (Inventory) -> Frontend Tasks.
+- Follow the approved System Design, API Contract, and Frontend Project Setup.
+- Consume only approved APIs.
+- Generate only the UI, components, state management, and integrations required for this sprint.
+- Do not modify backend code, API contracts, or future sprint functionality.
+
+Output:
+Generate production-ready frontend code only.
+
+---
+
+# Sprint 2: Admin Foundation (Inventory) - QA testing
+
+## Role:
+Act as the QA Engineer AI.
+
+Review [qa-engineer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/qa-engineer.md) 
+
+Execute the QA tasks assigned for Sprint 2: Admin Foundation (Inventory).
+
+Follow all referenced project documents.
+
+Strictly test :
+* Validate RBAC strictly denies customer tokens from accessing Admin APIs.
+* Verify correct number of seats are generated in DB upon screen creation.
+* Execute KPI-ADM-001 through KPI-ADM-005.
+* 5 new database tables.
+* 13 new API endpoints (12 Admin, 1 Public).
+* Admin Portal Dashboard and CRUD Operation.
+* API Postman collection
+
+
+Generate only the required QA artifacts.
+
+---
+
+# Defects Fixing Sprint 2: Admin Foundation (Inventory) QA Findings
+
+Read and follow:
+
+* [backend-developer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/backend-developer.md)  
+* [flutter-developer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/journal-hub/agent-prompts/personas/flutter-developer.md) 
+* [save-token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/journal-hub/agent-prompts/md-files/save-token.md) 
+
+## Action 
+Analys QA report [Inventory-defect-reports.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/testing/qa-artifacts/Inventory/Inventory-defect-reports.md) and fix all the defects.
+
+## Context
+
+The module has already been developed and tested. Your objective is to resolve all reported issues without introducing regressions or changing approved functionality.
+
+## Execute
+
+For each finding:
+1. Identify root cause.
+2. Implement the fix.
+3. Verify the fix.
+4. Check for related regressions.
+5. Update tests if required.
+
+After all fixes are completed
+
+generate:
+
+* testing/qa-artifacts/qa-fixes-summary.md
+
+
+Include:
+
+* Total issues received
+* Issues fixed
+* Remaining issues
+* Risks/Dependencies
+* Ready for QA Retest (Yes/No)
+
+Do not implement new features, refactor unrelated code, or modify approved workflows. Focus only on resolving QA findings and preparing the module for QA re-validation.
+
+---

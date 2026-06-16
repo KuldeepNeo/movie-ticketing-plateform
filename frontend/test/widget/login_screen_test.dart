@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_ticketing_app/features/auth/presentation/screens/login_screen.dart';
-import 'package:movie_ticketing_app/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:movie_ticketing_app/features/auth/domain/repositories/i_auth_repository.dart';
 import 'package:movie_ticketing_app/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:movie_ticketing_app/features/auth/domain/entities/user_entity.dart';

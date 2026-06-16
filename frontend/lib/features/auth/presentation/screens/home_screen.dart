@@ -2,19 +2,58 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../controllers/auth_controller.dart';
+import '../controllers/city_provider.dart';
+import '../widgets/city_selector_dialog.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkCitySelection();
+    });
+  }
+
+  void _checkCitySelection() {
+    final selectedCity = ref.read(selectedCityProvider);
+    if (selectedCity == null) {
+      _openCitySelector(isDismissible: false);
+    }
+  }
+
+  void _openCitySelector({required bool isDismissible}) {
+    showDialog(
+      context: context,
+      barrierDismissible: isDismissible,
+      builder: (context) => CitySelectorDialog(isDismissible: isDismissible),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final authState = ref.watch(authControllerProvider);
     final user = authState.user;
+    final selectedCity = ref.watch(selectedCityProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Dashboard'),
         actions: [
+          // City selector button
+          TextButton.icon(
+            style: TextButton.styleFrom(foregroundColor: Colors.white),
+            onPressed: () => _openCitySelector(isDismissible: true),
+            icon: const Icon(Icons.location_on_rounded, size: 18),
+            label: Text(selectedCity?.name ?? 'Select City'),
+          ),
+          const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.logout_rounded),
             onPressed: () {
@@ -53,10 +92,12 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Your authentication session is active and secure.',
+                Text(
+                  selectedCity != null
+                      ? 'Browsing movies in ${selectedCity.name}'
+                      : 'Select a city in the top bar to start browsing movies.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 14,
                   ),

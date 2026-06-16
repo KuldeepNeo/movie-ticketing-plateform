@@ -10,4 +10,19 @@ class ApiConstants {
   static const String refresh = '/auth/refresh';
   static const String logout = '/auth/logout';
   static const String me = '/auth/me';
+
+  // Cities
+  static const String cities = '/cities';
+
+  // Admin Movie Management
+  static const String adminMovies = '/admin/movies';
+  static String adminMovie(int id) => '/admin/movies/$id';
+
+  // Admin Theater Management
+  static const String adminTheaters = '/admin/theaters';
+  static String adminTheater(int id) => '/admin/theaters/$id';
+
+  // Admin Screen Management
+  static String adminTheaterScreens(int theaterId) => '/admin/theaters/$theaterId/screens';
+  static String adminScreen(int id) => '/admin/screens/$id';
 }

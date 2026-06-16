@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../features/auth/presentation/controllers/auth_controller.dart';
@@ -6,12 +5,16 @@ import '../features/auth/presentation/screens/landing_screen.dart';
 import '../features/auth/presentation/screens/login_screen.dart';
 import '../features/auth/presentation/screens/register_screen.dart';
 import '../features/auth/presentation/screens/home_screen.dart';
+import '../features/auth/presentation/screens/admin_shell_layout.dart';
+import '../features/auth/presentation/screens/admin_movies_screen.dart';
+import '../features/auth/presentation/screens/admin_theaters_screen.dart';
+import '../features/auth/presentation/screens/admin_screens_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authControllerProvider);
 
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/login',
     routes: [
       GoRoute(
         path: '/',
@@ -29,6 +32,27 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/home',
         builder: (context, state) => const HomeScreen(),
       ),
+      ShellRoute(
+        builder: (context, state, child) => AdminShellLayout(child: child),
+        routes: [
+          GoRoute(
+            path: '/admin/movies',
+            builder: (context, state) => const AdminMoviesScreen(),
+          ),
+          GoRoute(
+            path: '/admin/theaters',
+            builder: (context, state) => const AdminTheatersScreen(),
+          ),
+          GoRoute(
+            path: '/admin/theaters/:theaterId/screens',
+            builder: (context, state) {
+              final theaterIdStr = state.pathParameters['theaterId'] ?? '0';
+              final theaterId = int.tryParse(theaterIdStr) ?? 0;
+              return AdminScreensScreen(theaterId: theaterId);
+            },
+          ),
+        ],
+      ),
     ],
     redirect: (context, state) {
       final status = authState.status;
@@ -40,23 +64,39 @@ final routerProvider = Provider<GoRouter>((ref) {
       }
 
       final isAuthenticated = status == AuthStatus.authenticated;
-      
+      final isAdmin = isAuthenticated && authState.user?.role == 'admin';
+
       // Public route check
       final isPublicRoute = matchedLocation == '/' || 
                             matchedLocation == '/login' || 
                             matchedLocation == '/register';
 
-      if (!isAuthenticated && !isPublicRoute) {
-        // Redirect to landing if trying to access protected route without login
-        return '/';
+      final isAdminRoute = matchedLocation.startsWith('/admin');
+
+      if (!isAuthenticated) {
+        if (!isPublicRoute) {
+          return '/';
+        }
+        return null;
       }
 
-      if (isAuthenticated && isPublicRoute) {
-        // Redirect to home if logged-in user hits landing or sign in pages
-        return '/home';
+      // If authenticated
+      if (isAdmin) {
+        // Admins should always stay on admin pages
+        if (!isAdminRoute) {
+          return '/admin/movies';
+        }
+        return null;
+      } else {
+        // Customers should never access admin pages
+        if (isAdminRoute) {
+          return '/home';
+        }
+        if (isPublicRoute) {
+          return '/home';
+        }
+        return null;
       }
-
-      return null;
     },
   );
 });
