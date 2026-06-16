@@ -10,14 +10,29 @@ const logger = require('./config/logger');
 
 const app = express();
 
-// Set HTTP security headers
-app.use(helmet());
+// Set HTTP security headers - relax cross-origin resource/opener/embedder policies in development to support Flutter Web connections
+if (env.NODE_ENV === 'production') {
+  app.use(helmet());
+} else {
+  app.use(helmet({
+    crossOriginResourcePolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: false
+  }));
+}
 
-// Configure CORS
+// Configure CORS - dynamically permit all request origins in development to accommodate random local Flutter Web client ports
 app.use(cors({
-  origin: env.CORS_ORIGIN,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: (origin, callback) => {
+    if (env.NODE_ENV !== 'production' || !origin || origin === env.CORS_ORIGIN) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
 }));
 
 // Apply global rate limiting

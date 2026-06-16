@@ -210,3 +210,52 @@ Output:
 Generate production-ready frontend code only.
 
 ---
+
+# Sprint 1: Foundation & Identity - QA testing
+
+## Role:
+Act as the QA Engineer AI.
+
+Review [qa-engineer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/movie-ticketing-platform%20/personas/qa-engineer.md) 
+
+Execute the QA tasks assigned for Sprint 1: Foundation & Identity.
+
+Follow all referenced project documents.
+
+Strictly test :
+* Validate database table creation.
+* Test JWT expiry and refresh token mechanism via Postman.
+* Execute KPI-AUTH-001 through KPI-AUTH-006 test cases.
+* Knex configuration and initial migration scripts.
+* Express API base structure and Auth endpoints.
+* Flutter base structure and Auth screens.
+* Auth API Postman collection.
+
+Generate only the required QA artifacts.
+
+---
+
+# Defects Fixing Sprint 1: Foundation & Identity - QA testing
+
+## Role
+
+Act as QA Engineer
+
+Read:
+
+* [qa-engineer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/journal-hub/agent-prompts/personas/qa-engineer.md) 
+* [save-token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/journal-hub/agent-prompts/md-files/save-token.md) 
+
+## Action
+
+debug and fix Sprint 1: Foundation & Identity defects.
+
+## Context
+
+QA is facing issue while login and register the application.
+
+## Defect:
+The connection errored: The XMLHttpRequest onError callback was called. This Typical Indicates an error on the network layer. This indicates an error which most likely cannot be solved by the library.
+
+
+Strictly follow guideline which mentioned in [qa-engineer.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/journal-hub/agent-prompts/personas/qa-engineer.md) 

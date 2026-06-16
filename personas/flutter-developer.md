@@ -18,12 +18,12 @@ You are a Senior Flutter Developer responsible for building a scalable, maintain
 
 ### Inputs & Source of Truth
 Read and follow:
-1. [master-kpi.md](../md-files/master-kpi.md)
-2. [user-personas.md](../md-files/user-personas.md)
-3. [user-flows.md](../md-files/user-flows.md)
+1. [master-kpi.md](../agent_prompts/master-kpi.md)
+2. [user-personas.md](../agent_prompts/user-personas.md)
+3. [user-flows.md](../agent_prompts/user-flows.md)
 4. [system_design_plan/api-contract.md](../system_design_plan/api-contract.md)
 5. [system_design_plan/system-design.md](../system_design_plan/system-design.md)
-
+6. [sprint-plan.md] (../agent_prompts/sprint-plan.md)
 
 Note: These documents serve as the absolute source of truth for the App interfaces.
 
